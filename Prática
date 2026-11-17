@@ -1,0 +1,66 @@
+def analisar_pedidos():
+    # Inicializar variáveis conforme o fluxograma
+    i = 2
+    urgentes = 0
+    total_minutos = 0
+    maior_tempo = 0
+
+    print("=== ANÁLISE DE PEDIDOS DE SUPORTE ===")
+
+    # Contador i < 10?
+    while i < 10:
+        print(f"\n--- Iteração do Pedido (i = {i}) ---")
+        
+        # Ler prioridade e tempo
+        try:
+            prioridade = int(input("Introduza a prioridade: "))
+            tempo = int(input("Introduza o tempo estimado (minutos): "))
+        except ValueError:
+            prioridade = -1
+            tempo = -1
+
+        # Validação: (2 <= prioridade <= 5) E (tempo > 0)?
+        if 2 <= prioridade <= 5 and tempo > 0:
+            # Manter valor
+            pass
+        else:
+            # Atribuir por omissão
+            print("⚠️ Dados inválidos! A assumir valores por omissão: Prioridade = 5, Tempo = 20.")
+            prioridade = 5
+            tempo = 20
+
+        # Processar Valores do Pedido
+        if prioridade <= 2:
+            urgentes += 1
+            
+        total_minutos = total_minutos + tempo
+        
+        if tempo > maior_tempo:
+            maior_tempo = tempo
+            
+        i = i + 1
+
+    # Calcular média: total_minutos / 10
+    media = total_minutos / 10
+
+    # Classificar Carga
+    if total_minutos <= 300:
+        classificacao = "Carga Baixa"
+    else:
+        if total_minutos <= 400:
+            classificacao = "Carga Moderada"
+        else:
+            classificacao = "Carga Elevada"
+
+    # Apresentar Resultados Finais
+    print("\n==========================================")
+    print("APRESENTAR RESULTADOS FINAIS:")
+    print(f"- Nº de urgentes: {urgentes}")
+    print(f"- Total de minutos: {total_minutos}")
+    print(f"- Média por pedido: {media:.1f}")
+    print(f"- Maior estimativa: {maior_tempo}")
+    print(f"- Classificação: {classificacao}")
+    print("==========================================")
+
+# Executar a função
+analisar_pedidos()
